@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@theme {
+  --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --color-surface: #f8f9fa;
+  --color-surface-dim: #d9dadb;
+  --color-surface-bright: #f8f9fa;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f4f5;
+  --color-surface-container: #edeeef;
+  --color-surface-container-high: #e7e8e9;
+  --color-surface-container-highest: #e1e3e4;
+  --color-on-surface: #191c1d;
+  --color-on-surface-variant: #4d4732;
+  --color-inverse-surface: #2e3132;
+  --color-inverse-on-surface: #f0f1f2;
+  --color-outline: #7e775f;
+  --color-outline-variant: #d0c6ab;
+  --color-surface-tint: #705d00;
+  --color-primary: #705d00;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #ffd700;
+  --color-on-primary-container: #705e00;
+  --color-inverse-primary: #e9c400;
+  --color-secondary: #5f5e5f;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e4e2e3;
+  --color-on-secondary-container: #656465;
+  --color-tertiary: #3856c0;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #d1d8ff;
+  --color-on-tertiary-container: #3956c0;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-primary-fixed: #ffe16d;
+  --color-primary-fixed-dim: #e9c400;
+  --color-on-primary-fixed: #221b00;
+  --color-on-primary-fixed-variant: #544600;
+  --color-secondary-fixed: #e4e2e3;
+  --color-secondary-fixed-dim: #c8c6c7;
+  --color-on-secondary-fixed: #1b1c1c;
+  --color-on-secondary-fixed-variant: #474748;
+  --color-tertiary-fixed: #dde1ff;
+  --color-tertiary-fixed-dim: #b7c4ff;
+  --color-on-tertiary-fixed: #001452;
+  --color-on-tertiary-fixed-variant: #193ca7;
+  --color-background: #f8f9fa;
+  --color-on-background: #191c1d;
+
+  --spacing-base: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 12px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-container-max: 1200px;
+  --spacing-gutter: 24px;
+  
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+  --radius: 0.5rem;
+
+  --font-display: var(--font-plus-jakarta);
+  --font-headline: var(--font-plus-jakarta);
+  --font-body: var(--font-inter);
+  --font-label: var(--font-inter);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .joy-gradient-bar { background: linear-gradient(90deg, #ffd700, #ffeb3b); }
+  .glass-card { 
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+  }
+  .top-3-hover:hover { transform: translateY(-8px); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .joy-gradient { background: linear-gradient(135deg, #ffd700 0%, #ffe16d 100%); }
+  .streak-dot { transition: all 0.3s ease; }
+  .streak-dot:hover { transform: scale(1.2); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .smile-meter-gradient { background: linear-gradient(90deg, #705d00 0%, #ffd700 100%); }
+  .camera-overlay { background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%); }
+  .scan-effect { animation: scanline 4s linear infinite; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #d9dadb; border-radius: 4px; }
