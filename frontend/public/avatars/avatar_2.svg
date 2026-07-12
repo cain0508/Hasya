@@ -1,0 +1,23 @@
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="120" cy="120" r="118" fill="#ffd700"/>
+  <circle cx="120" cy="120" r="104" fill="#fdf6e3"/>
+  <clipPath id="clip"><circle cx="120" cy="120" r="104"/></clipPath>
+  <g clip-path="url(#clip)">
+    <!-- shoulders / backpack straps -->
+    <path d="M40 240 Q60 165 120 165 Q180 165 200 240 Z" fill="#1a1a1a"/>
+    <rect x="95" y="150" width="14" height="60" fill="#fdf6e3" stroke="#1a1a1a" stroke-width="4"/>
+    <rect x="131" y="150" width="14" height="60" fill="#fdf6e3" stroke="#1a1a1a" stroke-width="4"/>
+    <!-- neck -->
+    <rect x="105" y="130" width="30" height="30" fill="#fdf6e3"/>
+    <!-- face -->
+    <circle cx="120" cy="105" r="52" fill="#fdf6e3" stroke="#1a1a1a" stroke-width="4"/>
+    <path d="M70 90 L82 55 L95 85 L108 50 L120 85 L132 50 L145 85 L158 55 L170 90 Q120 60 70 90 Z" fill="#1a1a1a"/>
+    
+  <line x1="98" y1="98" x2="112" y2="98" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="134" cy="98" r="4" fill="#1a1a1a"/>
+  <path d="M100 120 Q120 140 140 118" stroke="#1a1a1a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M104 128 Q120 136 136 126" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  </g>
+  <circle cx="120" cy="120" r="104" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Yellow circle border -->
+  <circle cx="50" cy="50" r="48" fill="#FFF" stroke="#ffd700" stroke-width="4"/>
+  
+  <!-- Simple hand-drawn style face -->
+  <path d="M 30 40 Q 35 35 40 40" fill="none" stroke="#191c1d" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 60 40 Q 65 35 70 40" fill="none" stroke="#191c1d" stroke-width="3" stroke-linecap="round"/>
+  
+  <path d="M 35 60 Q 50 75 65 60" fill="none" stroke="#191c1d" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Some abstract squiggles -->
+  <path d="M 20 20 Q 25 15 30 25" fill="none" stroke="#ffd700" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 70 80 Q 75 85 80 75" fill="none" stroke="#ffe16d" stroke-width="2" stroke-linecap="round"/>
+</svg>
