@@ -8,8 +8,7 @@ export function useHasya() {
 }
 
 export function HasyaProvider({ children }) {
-  const [wallet, setWallet] = useState(''); // Empty when logged out
-  const [pendingImage, setPendingImage] = useState(null); // Used to resume score after login
+  const [wallet, setWallet] = useState('0x123...abc'); // Mock wallet or connect to web3
   const [latestScore, setLatestScore] = useState(null); // Result of the most recent score_laugh
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [bestScoreLeaderboardData, setBestScoreLeaderboardData] = useState([]);
@@ -39,8 +38,6 @@ export function HasyaProvider({ children }) {
   const value = {
     wallet,
     setWallet,
-    pendingImage,
-    setPendingImage,
     latestScore,
     setLatestScore,
     leaderboardData,
