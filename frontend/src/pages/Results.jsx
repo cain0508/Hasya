@@ -58,7 +58,7 @@ export default function Results({ setCurrentPage }) {
   const usdEquivalent = (parseFloat(ethAmount) * USD_RATE).toFixed(2);
 
   return (
-    <main className="flex-1 overflow-y-auto no-scrollbar p-6 lg:p-10 bg-background pt-24 pb-16">
+    <main className="flex-1 overflow-y-auto no-scrollbar px-6 lg:px-10 bg-background pt-24 pb-16">
       <div className="max-w-[1000px] mx-auto flex flex-col gap-10">
 
         {/* Welcome Section */}

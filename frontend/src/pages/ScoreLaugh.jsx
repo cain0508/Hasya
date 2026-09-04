@@ -5,7 +5,7 @@ import { useHasya } from '../context/HasyaContext';
 const DEFAULT_PREVIEW = "https://lh3.googleusercontent.com/aida-public/AB6AXuCyWsg6SpYkLfbWNZd4tfFv4-zFo7vTQGRltodwCxaXaHDpivXN0XYnM18-E-TQ56dk_PMtZk1BcW_69lSlpCuSeHRLmMXZrqBDgVaiHh91lvJ9M4HUYArjsHPHzX6RSZkjhMjhdZlU3CXdY97qz-mevtusbhT7iByHpIzWC8LOLfgIB6gO4CXyrFmDEZShkBCL4Hy9SEhTzUCAYjeEgshP01G97yzcfhJNoyzK3_noAM3wEoYAE3x4";
 
 export default function ScoreLaugh({ setCurrentPage }) {
-  const { wallet, setLatestScore, updateLeaderboards } = useHasya();
+  const { wallet, setLatestScore, updateLeaderboards, pendingImage, setPendingImage } = useHasya();
   
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(DEFAULT_PREVIEW);
@@ -14,12 +14,38 @@ export default function ScoreLaugh({ setCurrentPage }) {
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
 
-  // ── Camera state ──
+  //  Camera state 
   const [cameraActive, setCameraActive] = useState(false);
   const [cameraReady, setCameraReady] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
+
+  // Auto-submit pending image if coming back from login
+  useEffect(() => {
+    if (wallet && pendingImage) {
+      setImage(pendingImage);
+      setPreviewUrl(URL.createObjectURL(pendingImage));
+      setPendingImage(null);
+      
+      const submitPending = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+          const res = await scoreLaugh(pendingImage, wallet);
+          setResult(res);
+          setLatestScore(res);
+          updateLeaderboards();
+        } catch (err) {
+          console.error(err);
+          setError("Failed to score laugh. Please try again.");
+        } finally {
+          setLoading(false);
+        }
+      };
+      submitPending();
+    }
+  }, [wallet, pendingImage, setLatestScore, updateLeaderboards, setPendingImage]);
 
   // Start the webcam stream
   const startCamera = useCallback(async () => {
@@ -113,6 +139,13 @@ export default function ScoreLaugh({ setCurrentPage }) {
       return;
     }
     
+    // 🐴 ponytail: redirect to login if no wallet, store pending image to auto-submit later
+    if (!wallet) {
+      setPendingImage(image);
+      setCurrentPage('login');
+      return;
+    }
+    
     setLoading(true);
     setError(null);
     
@@ -138,14 +171,14 @@ export default function ScoreLaugh({ setCurrentPage }) {
     setError(null);
     setPreviewUrl(DEFAULT_PREVIEW);
   };
-
+//CODE FOR GETTING AUTHENTICITY OF THE PHOTO UPLOADED
   const getMetric = (index, fallbackLabel, fallbackValue) => {
     if (!result || !result.components) return { label: fallbackLabel, value: fallbackValue };
     const entries = Object.entries(result.components);
     if (entries.length > index) {
       return { 
         label: entries[index][0].replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), 
-        value: typeof entries[index][1] === 'number' ? Math.round(entries[index][1] * 100) : fallbackValue
+        value: typeof entries[index][1] === 'number' ? Math.round(entries[index][1] <= 1 ? entries[index][1] * 100 : entries[index][1]) : fallbackValue
       };
     }
     return { label: fallbackLabel, value: fallbackValue };
@@ -218,13 +251,13 @@ export default function ScoreLaugh({ setCurrentPage }) {
                 <div className="flex justify-between items-end mb-1">
                   <span className="text-white font-bold drop-shadow-md text-xl">SMILE METER</span>
                   <span className="text-primary-container font-extrabold text-xl">
-                    {result ? `${Math.round(result.score * 100)}%` : (image ? '?' : '94%')}
+                    {result ? `${Math.round(result.score <= 1 ? result.score * 100 : result.score)}%` : (image ? '?' : '94%')}
                   </span>
                 </div>
                 <div className="h-4 w-full bg-black/20 rounded-full overflow-hidden backdrop-blur-sm">
                   <div 
                     className="h-full smile-meter-gradient transition-all duration-300 ease-out" 
-                    style={{width: result ? `${result.score * 100}%` : (image ? '0%' : '94%')}}
+                    style={{width: result ? `${result.score <= 1 ? result.score * 100 : result.score}%` : (image ? '0%' : '94%')}}
                   ></div>
                 </div>
               </div>
@@ -363,7 +396,7 @@ export default function ScoreLaugh({ setCurrentPage }) {
               <span className="material-symbols-outlined text-primary !text-[40px]" style={{fontVariationSettings: "'FILL' 1"}}>auto_awesome</span>
             </div>
             <h3 className="font-display text-3xl font-bold text-on-primary-container z-10">
-              {result ? `Authenticity: ${Math.round(result.score * 100)}%` : 'Authenticity: --%'}
+              {result ? `Authenticity: ${Math.round(result.score <= 1 ? result.score * 100 : result.score)}%` : 'Authenticity: --%'}
             </h3>
             <p className="font-body text-lg text-on-primary-container/80 z-10">Proof of Joy validated on HASYA Protocol.</p>
             
